@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie de Photos Interactive</title>
+  <style>
+    /* CSS */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #333;
+    }
+
+    #image {
+      width: 80%;
+      height: 300px;
+      margin: 20px auto;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-size: cover;
+      background-position: center;
+    }
+
+    #image p {
+      font-size: 1.2em;
+      color: #555;
+    }
+
+    .preview {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .preview img {
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      border: 2px solid #ccc;
+      transition: transform 0.2s ease;
+    }
+
+    .preview img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Ma Galerie de Photos</h1>
+  <div id="image">
+    <p>Survolez une image ci-dessous pour l'afficher ici.</p>
+  </div>
+
+  <div class="preview">
+    <img src="image1.jpg" alt="Description 1" tabindex="0">
+    <img src="image2.jpg" alt="Description 2" tabindex="0">
+    <img src="image3.jpg" alt="Description 3" tabindex="0">
+    <img src="image4.jpg" alt="Description 4" tabindex="0">
+    <img src="image5.jpg" alt="Description 5" tabindex="0">
+    <img src="image6.jpg" alt="Description 6" tabindex="0">
+  </div>
+
+  <script>
+    // JavaScript
+    // Fonction pour mettre à jour l'image et le texte au survol ou au focus
+    function upDate(previewPic) {
+      console.log("Événement déclenché : survol ou focus");
+      document.getElementById('image').innerHTML = previewPic.alt;
+      document.getElementById('image').style.backgroundImage = "url('" + previewPic.src + "')";
+    }
+
+    // Fonction pour rétablir l'état initial
+    function unDo() {
+      console.log("Événement déclenché : sortie ou blur");
+      document.getElementById('image').innerHTML = "Survolez une image ci-dessous pour l'afficher ici.";
+      document.getElementById('image').style.backgroundImage = "url('')";
+    }
+
+    // Ajouter des écouteurs d'événements pour onfocus et onblur
+    function addFocusBlurListeners() {
+      const images = document.querySelectorAll('.preview img');
+      images.forEach(img => {
+        img.addEventListener('focus', () => upDate(img));
+        img.addEventListener('blur', unDo);
+      });
+    }
+
+    // Ajouter des attributs tabindex dynamiquement
+    function addTabIndex() {
+      const images = document.querySelectorAll('.preview img');
+      images.forEach((img, index) => {
+        img.setAttribute('tabindex', index + 1);
+      });
+      console.log("Attributs tabindex ajoutés");
+    }
+
+    // Appeler les fonctions au chargement de la page
+    window.onload = function () {
+      addTabIndex();
+      addFocusBlurListeners();
+      console.log("Page chargée");
+    };
+  </script>
+</body>
+</html>
