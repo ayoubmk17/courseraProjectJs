@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Galerie de Photos Interactive</title>
   <style>
-    /* CSS */
     body {
       font-family: Arial, sans-serif;
       text-align: center;
@@ -73,22 +72,18 @@
   </div>
 
   <script>
-    // JavaScript
-    // Fonction pour mettre à jour l'image et le texte au survol ou au focus
     function upDate(previewPic) {
       console.log("Événement déclenché : survol ou focus");
       document.getElementById('image').innerHTML = previewPic.alt;
       document.getElementById('image').style.backgroundImage = "url('" + previewPic.src + "')";
     }
 
-    // Fonction pour rétablir l'état initial
     function unDo() {
       console.log("Événement déclenché : sortie ou blur");
       document.getElementById('image').innerHTML = "Survolez une image ci-dessous pour l'afficher ici.";
       document.getElementById('image').style.backgroundImage = "url('')";
     }
 
-    // Ajouter des écouteurs d'événements pour onfocus et onblur
     function addFocusBlurListeners() {
       const images = document.querySelectorAll('.preview img');
       images.forEach(img => {
@@ -97,7 +92,6 @@
       });
     }
 
-    // Ajouter des attributs tabindex dynamiquement
     function addTabIndex() {
       const images = document.querySelectorAll('.preview img');
       images.forEach((img, index) => {
@@ -106,7 +100,6 @@
       console.log("Attributs tabindex ajoutés");
     }
 
-    // Appeler les fonctions au chargement de la page
     window.onload = function () {
       addTabIndex();
       addFocusBlurListeners();
